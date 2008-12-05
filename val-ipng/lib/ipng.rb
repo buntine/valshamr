@@ -7,8 +7,8 @@ class Valshamr::IPng
   end
 
   def transform!
-    unless is_valid_ip?
-      raise Valshamr::InvalidIPError "Expected IPv4 address in the form of xxx.xxx.xxx.xxx, but received #{@ip_address}"
+    unless is_valid_address?
+      raise Valshamr::InvalidIPError, "Expected IPv4 address in the form of x[xx].x[xx].x[xx].x[xx], but received: #{@ip_address}"
     end
 
     octets = @ip_address.split "."
@@ -19,15 +19,19 @@ class Valshamr::IPng
 
   private
 
-  def is_valid_ip?
-    true
+  def is_valid_address?
+    @ip_address =~ /^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$/
   end
 
   def is_valid_octet?(octet)
-    true
+    (0..255).include? octet.to_i
   end
 
   def convert_octet_to_hexadecimal(octet)
+    unless is_valid_octet? octet
+      raise Valshamr::InvalidOctetError, "Expected octet in the range of 0..255, but received: #{octet}"
+    end
+
     "FF"
   end
 
