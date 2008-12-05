@@ -19,9 +19,9 @@ describe Valshamr::IPng do
     ipng_b = Valshamr::IPng.new "192.168.30.210"
     ipng_c = Valshamr::IPng.new "63.205.43.140"
 
-    ipng_a.transform!.should eql("FFFF:FFFF")
-    ipng_b.transform!.should eql("FFFF:FFFF")
-    ipng_c.transform!.should eql("FFFF:FFFF")
+    ipng_a.transform!.should eql("::0A01:0A03")
+    ipng_b.transform!.should eql("::C0A8:1ED2")
+    ipng_c.transform!.should eql("::3FCD:2B8C")
   end
 
   it "should raise exception if the IP address is invalid" do
