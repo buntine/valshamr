@@ -3,21 +3,31 @@
  By Andrew Buntine, 2008
 ============================================
 
- Valshamr is a collection of small, attachable
- tools (written in Ruby) that perform some common
- IPv6-related tasks.
+ 1. Introduction
 
- Specifically:
+   Valshamr is a collection of small, attachable
+   tools (written in Ruby) that perform some common
+   IPv6-related tasks.
 
-   - Transform IPv4 address to it's IPv6 equivalent.
-   - Contract an IPv6 address to double-point notation.
-   - Expand an IPv6 address from dp-notation to it's full form.
+   Specifically:
 
- They can read STDIN, so you can pipe to them...
+     - Transform IPv4 address to it's IPv6 equivalent. (val-ipng)
+     - Contract an IPv6 address to double-point notation. (val-compact)
+     - Expand an IPv6 address from dp-notation to it's full form. (val-expand)
 
- NOTE: This is more-so a symptom of the badass coffee I just bought
-       rather than an attempt to write something truly useful.
+   They can read STDIN, so you can pipe to them...
 
- NOTE: In Norse mythology, Valshamr is a cloak of falcon feathers owned by Freyja.
-       It gives her the ability to morph into the guise of any bird and fly between
-       worlds!
+
+ 2. Installation and Usage
+
+   See the tool-specific README files for instructions. e.g ./val-ipng/README
+
+
+ 3. Notes
+
+   - This is more-so a symptom of the badass coffee I just bought
+     rather than an attempt to write something truly useful.
+
+   - In Norse mythology, Valshamr is a cloak of falcon feathers owned by Freyja.
+     It gives her the ability to morph into the guise of any bird and fly between
+     worlds!
