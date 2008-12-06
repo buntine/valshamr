@@ -18,20 +18,25 @@ class Valshamr::Expand
     ip = [""] * 8
     left, right = @ip_address.split "::", 2
 
+    # Place the left-hand octets in their appropriate positions.
     unless left.empty?
-      left_slices = left.split ":"
-      left_slices.each_with_index { |slice, index| ip[index] = slice }
+      left_octets = left.split ":"
+      left_octets.each_with_index { |slice, index| ip[index] = slice }
     end
 
+    # Place the right-hand octets in their appropriate positions (reverse order).
     unless right.empty?
-      right_slices = right.split ":"
-      right_slices.reverse!
-      length = ip.length - 1
-      right_slices.each_with_index { |slice, index| ip[length - index] = slice }
+      right_octets = right.split ":"
+      right_octets.reverse!
+      right_octets.each_with_index { |slice, index| ip[7 - index] = slice }
     end
 
-    ip.map! do |octet| 
-      octet.empty? ? "0" : octet
+    # Finally, anything left over in the middle must be a zero.
+    ip.map! { |octet| octet.empty? ? "0" : octet }
+
+    # Pad each octet with leading zeroes, if necessary.
+    if length.eql? :long
+      ip.map! { |octet| octet.insert(0, "0" * (4 - octet.length)) }
     end
 
     ip.join ":"
@@ -48,4 +53,3 @@ class Valshamr::Expand
 end
 
 class Valshamr::InvalidIPv6Error < Exception; end
-class Valshamr::InvalidHexadecimalOctetError < Exception; end

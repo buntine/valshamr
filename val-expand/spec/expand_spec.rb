@@ -29,7 +29,7 @@ describe Valshamr::Expand do
   it "should expand address into it's fully-expanded form" do
     val_expander_a = Valshamr::Expand.new "1080::8:C0A8:1ED2"
 
-    val_expander_a.expand.should eql('1080:0000:0000:0000:0000:0008:C0A8:1ED2')
+    val_expander_a.expand(:long).should eql('1080:0000:0000:0000:0000:0008:C0A8:1ED2')
   end
 
   it "should raise exception if an invalid address is supplied" do
@@ -43,7 +43,5 @@ describe Valshamr::Expand do
 
     lambda { val_expander.expand }.should raise_error(Valshamr::InvalidIPv6Error)
   end
-
-  it "should raise exception if an invalid octet is supplied"
 
 end
