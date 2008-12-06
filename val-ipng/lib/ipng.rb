@@ -11,7 +11,7 @@ class Valshamr::IPng
   end
 
   # Performs the actual transformation. The IPv6 address
-  # is returned in double-point notation (compact form).
+  # is returned in double-colon notation (compact form).
   def transform
     unless is_valid_ipv4_address?
       raise Valshamr::InvalidIPError, "Expected IPv4 address in the form of x[xx].x[xx].x[xx].x[xx], but received: #{@ip_address}"

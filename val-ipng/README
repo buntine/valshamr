@@ -11,7 +11,7 @@
 
  2. Usage
 
-   # Standare usage. This will return the IPv6 equivelant in double-point notation (compacted). 
+   # Standare usage. This will return the IPv6 equivelant in double-colon notation (compacted). 
    ipng = Valshamr::IPng.new "192.168.30.210"
    ipng.transform
    => "::C0A8:1ED2"

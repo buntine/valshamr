@@ -12,7 +12,7 @@
    Specifically:
 
      - Transform IPv4 address to it's IPv6 equivalent. (val-ipng)
-     - Contract an IPv6 address to double-point notation. (val-compact)
+     - Contract an IPv6 address to double-colon notation. (val-compact)
      - Expand an IPv6 address from dp-notation to it's full form. (val-expand)
 
    They can read STDIN, so you can pipe to them...
