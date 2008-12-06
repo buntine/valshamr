@@ -29,13 +29,13 @@ describe Valshamr::IPng do
   it "should raise exception if the IP address is invalid" do
     ipng = Valshamr::IPng.new "I enjoy obscure Russian heavy metal from the '80s"
 
-    lambda { ipng.transform }.should raise_error(Valshamr::InvalidIPError)
+    lambda { ipng.transform }.should raise_error(Valshamr::InvalidIPv4Error)
   end
 
   it "should raise exception if an octet is invalid" do
     ipng = Valshamr::IPng.new "10.2.450.100"
 
-    lambda { ipng.transform }.should raise_error(Valshamr::InvalidOctetError)
+    lambda { ipng.transform }.should raise_error(Valshamr::InvalidDecimalOctetError)
   end
 
 end

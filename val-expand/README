@@ -21,7 +21,7 @@
    ipng.expand :long
    => "1080:0000:0000:0000:0000:0800:C0A8:1ED2"
 
-   # Note, the IP address will refault to localhost if nothing is supplied.
+   # Note, the IP address will default to localhost if nothing is supplied.
    ipng = Valshamr::Expand.new
    ipng.expand
    => "0:0:0:0:0:0:0:1"

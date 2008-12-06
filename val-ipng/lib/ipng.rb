@@ -14,7 +14,7 @@ class Valshamr::IPng
   # is returned in double-colon notation (compact form).
   def transform
     unless is_valid_ipv4_address?
-      raise Valshamr::InvalidIPError, "Expected IPv4 address in the form of x[xx].x[xx].x[xx].x[xx], but received: #{@ip_address}"
+      raise Valshamr::InvalidIPv4Error, "Expected IPv4 address in the form of x[xx].x[xx].x[xx].x[xx], but received: #{@ip_address}"
     end
 
     octets = @ip_address.split "."
@@ -38,7 +38,7 @@ class Valshamr::IPng
   # Converts the decimal octet to base-16.
   def convert_decimal_octet_to_hexadecimal(octet)
     unless is_valid_decimal_octet? octet
-      raise Valshamr::InvalidOctetError, "Expected octet in the range of 0..255, but received: #{octet}"
+      raise Valshamr::InvalidDecimalOctetError, "Expected octet in the range of 0..255, but received: #{octet}"
     end
 
     hexadecimal = octet.to_s(base=16).upcase
@@ -61,5 +61,5 @@ class Valshamr::IPng
 
 end
 
-class Valshamr::InvalidIPError < Exception; end
-class Valshamr::InvalidOctetError < Exception; end
+class Valshamr::InvalidIPv4Error < Exception; end
+class Valshamr::InvalidDecimalOctetError < Exception; end
