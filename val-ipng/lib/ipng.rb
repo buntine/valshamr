@@ -12,7 +12,7 @@ class Valshamr::IPng
     end
 
     octets = @ip_address.split "."
-    octets.map! { |octet| convert_decimal_octet_to_hexadecimal octet }
+    octets.map! { |octet| convert_decimal_octet_to_hexadecimal octet.to_i }
 
     new_ip = construct_hexadecimal_octets octets
 
@@ -34,7 +34,10 @@ class Valshamr::IPng
       raise Valshamr::InvalidOctetError, "Expected octet in the range of 0..255, but received: #{octet}"
     end
 
-    "FF"
+    hexadecimal = octet.to_s(base=16).upcase
+    hexadecimal.insert(0, "0") if hexadecimal.length == 1
+
+    hexadecimal
   end
 
   def construct_hexadecimal_octets(octets)
