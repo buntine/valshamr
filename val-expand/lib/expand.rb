@@ -11,7 +11,7 @@ class Valshamr::Expand
   end
 
   def expand(length = :short)
-    unless is_valid_ipv6_address?
+    unless is_valid_compacted_ipv6_address?
       raise Valshamr::InvalidIPv6Error, "Expected compacted IPv6 address (e.g ::8:CD09:1F0A), but received: #{@ip_address}"
     end
 
@@ -46,7 +46,7 @@ class Valshamr::Expand
 
   # This is a very slack implementation.
   # Feel free to improve it.
-  def is_valid_ipv6_address?
+  def is_valid_compacted_ipv6_address?
     (@ip_address =~ /^[a-fA-F0-9\:]{3,37}$/ and @ip_address.include? "::")
   end
 
