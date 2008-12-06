@@ -1,0 +1,29 @@
+============================================
+ val-expand v0.1
+ By Andrew Buntine, 2008
+============================================
+
+ 1. Introduction
+
+   The val-expand tool is part of the Valshamr suite. It's sole purpose is to expand
+   a well-formed IPv6 address from double-colon notation into it's full form.
+
+
+ 2. Usage
+
+   # Standare usage. This will return the IPv6 address in it's full form (without leading zeroes).
+   ipng = Valshamr::Expand.new "1080::800:C0A8:1ED2"
+   ipng.expand
+   => "1080:0:0:0:0:800:C0A8:1ED2"
+
+   # You can also instruct the transformer to add in leading zeroes, so all 32 characters appear (+ seven colons).
+   ipng = Valshamr::Expand.new "1080::800:C0A8::1ED2"
+   ipng.expand :long
+   => "1080:0000:0000:0000:0000:0800:C0A8:1ED2"
+
+   # Note, the IP address will refault to localhost if nothing is supplied.
+   ipng = Valshamr::Expand.new
+   ipng.expand
+   => "0:0:0:0:0:0:0:1"
+
+   The Valshamr suite ships with a command-line tool that implements this library.
