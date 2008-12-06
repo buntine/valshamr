@@ -23,7 +23,7 @@ describe Valshamr::IPng do
     ipng_a.transform.should eql("::0A01:0A03")
     ipng_b.transform.should eql("::C0A8:1ED2")
     ipng_c.transform.should eql("::3FCD:2B8C")
-    ipng_d.transform.should eql("::7F00:0001") # This is 127.0.0.1
+    ipng_d.transform.should eql("::7F00:0001") # This is localhost.
   end
 
   it "should raise exception if the IP address is invalid" do
