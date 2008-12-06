@@ -23,9 +23,8 @@ class Valshamr::Compact
   # This is a very slack implementation.
   # Feel free to improve it.
   def is_valid_expanded_ipv6_address?
-    (@ip_address =~ /^[a-fA-F0-9\:]{3,37}$/ and !@ip_address.include? "::")
+    (@ip_address =~ /^[a-fA-F0-9\:]{15,39}$/ and !@ip_address.include? "::")
   end
-
 end
 
 class Valshamr::InvalidIPv6Error < Exception; end
