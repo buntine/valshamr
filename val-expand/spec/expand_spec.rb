@@ -16,8 +16,14 @@ describe Valshamr::Expand do
 
   it "should expand address into it's semi-expanded form" do
     val_expander_a = Valshamr::Expand.new "1080::8:C0A8:1ED2"
+    val_expander_b = Valshamr::Expand.new "1010:8::CD11:C0A8:1ED2"
+    val_expander_c = Valshamr::Expand.new "::F0A8:7EC4"
+    val_expander_d = Valshamr::Expand.new
 
     val_expander_a.expand.should eql('1080:0:0:0:0:8:C0A8:1ED2')
+    val_expander_b.expand.should eql('1010:8:0:0:0:CD11:C0A8:1ED2')
+    val_expander_c.expand.should eql('0:0:0:0:0:0:F0A8:7EC4')
+    val_expander_d.expand.should eql('0:0:0:0:0:0:0:1')
   end
 
   it "should expand address into it's fully-expanded form" do
