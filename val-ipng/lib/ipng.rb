@@ -1,3 +1,7 @@
+
+# This class is part of the Valshamr software suite.
+# It will transform a valid IPv4 address (e.g 192.168.30.210) into it's IPv6 equivelant (::C0A8:1ED2).
+
 class Valshamr::IPng
 
   attr_reader :ip_address
@@ -6,7 +10,9 @@ class Valshamr::IPng
     @ip_address = ip_address.to_s
   end
 
-  def transform!
+  # Performs the actual transformation. The IPv6 address
+  # is returned in double-point notation (compact form).
+  def transform
     unless is_valid_ipv4_address?
       raise Valshamr::InvalidIPError, "Expected IPv4 address in the form of x[xx].x[xx].x[xx].x[xx], but received: #{@ip_address}"
     end
@@ -29,6 +35,7 @@ class Valshamr::IPng
     (0..255).include? octet.to_i
   end
 
+  # Converts the decimal octet to base-16.
   def convert_decimal_octet_to_hexadecimal(octet)
     unless is_valid_decimal_octet? octet
       raise Valshamr::InvalidOctetError, "Expected octet in the range of 0..255, but received: #{octet}"
@@ -40,6 +47,8 @@ class Valshamr::IPng
     hexadecimal
   end
 
+  # Breaks the array into two slices and joins them
+  # with a colon.
   def construct_hexadecimal_octets(octets)
     octet_group = []
 
