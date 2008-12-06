@@ -8,19 +8,23 @@
    The val-ipng tool is part of the Valshamr suite. It's sole purpose is to transform
    a well-formed IPv4 address into it's IPv6 equivelant.
 
-   It runs from the terminal and can accept STDIN (for poping, etc).
-
 
  2. Usage
 
    # Standare usage. This will return the IPv6 equivelant in double-point notation (compacted). 
-   $ val-ipng 127.0.0.1
+   ipng = Valshamr::IPng.new "192.168.30.210"
+   ipng.transform
+   => "::C0A8:1ED2"
 
-   # You can also expand the returned value by using the -e or --expand switch
-   $ val-ipng --expand 12.168.10.100
+   # Note, the IP address will refault to localhost if nothing is supplied.
+   ipng = Valshamr::IPng.new
+   ipng.transform
+   => "::7F00:0001"
+
+   The Valshamr suite ships with a command-line tool that implements this library.
 
 
  3. Notes
 
    IPng stands for Internet Protocol, the Next Generation. Yes, it is a reference to Star Trek!
-   This is actually an official name for the IPv6 protocol suite. 
+   This is actually an official name for the IPv6 protocol suite according to RFC 1752. 
