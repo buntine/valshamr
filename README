@@ -12,21 +12,23 @@
    Specifically:
 
      - Transform IPv4 address to it's IPv6 equivalent. (val-ipng)
-     - Contract an IPv6 address to double-colon notation. (val-compact)
-     - Expand an IPv6 address from dp-notation to it's full form. (val-expand)
+     - Contract an IPv6 address to short and/or double-colon notation. (val-compact)
+     - Expand an IPv6 address from dc-notation to it's full form. (val-expand)
 
    They can read STDIN, so you can pipe to them...
 
 
  2. Installation and Usage
 
-   See the tool-specific README files for instructions. e.g ./val-ipng/README
+   See the tool-specific README files for instructions on in-code usage. e.g ./val-ipng/README
 
+   I will commit the implementing scripts shortly.
 
  3. Notes
 
-   - This is more-so a symptom of the badass coffee I just bought
-     rather than an attempt to write something truly useful.
+   - This is more-so a symptom of the badass coffee I just bought rather than an 
+     attempt to write something truly useful. I am also experimenting with differing
+     packaging/distribution concepts.
 
    - In Norse mythology, Valshamr is a cloak of falcon feathers owned by Freyja.
      It gives her the ability to morph into the guise of any bird and fly between
