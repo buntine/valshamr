@@ -8,10 +8,10 @@ length = :short
 
 # Parse the supplied options.
 OptionParser.new do |opts|
-  opts.banner = "Usage: expand.rb [options] [address(es)]"
+  opts.banner = "Usage: compact.rb [address(es)]"
 
-  opts.on("-l", "--long", "Fully expand the address") do
-    length = :long
+  opts.on("-t", "--tiny", "Compact the address to double-colon notation") do
+    length = :tiny
   end
 end.parse!
 
@@ -22,12 +22,12 @@ if STDIN.fcntl(Fcntl::F_GETFL, 0) == 0
   addresses.concat STDIN.readlines.map { |line| line.sub /\n$/, '' }
 end
 
-# Expand each given IP address.
+# Compact each given IP address.
 addresses.each do |ip_address|
-  expander = Valshamr::Expand.new ip_address
+  compactor = Valshamr::Compact.new ip_address
 
   begin
-    puts expander.expand(length)
+    puts compactor.compact(length)
   rescue => e
      exit 1
      raise e

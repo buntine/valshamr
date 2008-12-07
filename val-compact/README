@@ -7,7 +7,7 @@
 
    The val-compact tool is part of the Valshamr suite. It's sole purpose is to compact
    a full-formed IPv6 address into it's double-colon notation equivalent. It will work
-   with both full (e.g 0000.0000.0000.FF11.0090.88CD.1ED2.000A) and 
+   with both full (e.g 0000:0000:0000:FF11:0090:88CD:1ED2:000A) and 
    semi-full (e.g 180:8:0:0:0:0:FFF1:FF88) addresses.
 
 
@@ -16,11 +16,16 @@
    # Standare usage. This will return the IPv6 address in it's compact form.
    compactor = Valshamr::Compact.new "1080:0000:0000:0000:0000:0800:C0A8:1ED2"
    compactor.compact
+   => "1080:0:0:0:0:800:C0A8:1ED2"
+
+   # You can also compact the address down to double-colon version.
+   compactor = Valshamr::Compact.new "1080:0000:0000:0000:0000:0800:C0A8:1ED2"
+   compactor.compact(:tiny)
    => "1080::800:C0A8:1ED2"
 
    # Note, the IP address will default to localhost if nothing is supplied.
    compactor = Valshamr::Compact.new
-   compactor.compact
+   compactor.compact(:tiny)
    => "::1"
 
    The Valshamr suite ships with a command-line tool that implements this library.
