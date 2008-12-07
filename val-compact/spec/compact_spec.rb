@@ -21,7 +21,7 @@ describe Valshamr::Compact do
     val_compactor_d = Valshamr::Compact.new
 
     val_compactor_a.compact(:tiny).should eql("1080:900:CDDC::C0A8:1ED2")
-    val_compactor_b.compact(:tiny).should eql("10AB:80::C0A8:1ED2")
+    val_compactor_b.compact(:tiny).should eql("10AB:80::C0A8:10DC")
     val_compactor_c.compact(:tiny).should eql("::FF11:DD22")
     val_compactor_d.compact(:tiny).should eql("::1")
   end
@@ -33,7 +33,7 @@ describe Valshamr::Compact do
     val_compactor_d = Valshamr::Compact.new
 
     val_compactor_a.compact.should eql("1080:900:CDDC:0:0:0:C0A8:1ED2")
-    val_compactor_b.compact.should eql("10AB:80:90:ACC1:0:0:C0A8:1ED2")
+    val_compactor_b.compact.should eql("10AB:80:90:ACC1:0:0:C0A8:10DC")
     val_compactor_c.compact.should eql("0:0:0:0:0:0:FF11:DD22")
     val_compactor_d.compact.should eql("0:0:0:0:0:0:0:1")
   end
