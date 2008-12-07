@@ -15,14 +15,36 @@
      - Contract an IPv6 address to short and/or double-colon notation. (val-compact)
      - Expand an IPv6 address from dc-notation to it's full form. (val-expand)
 
-   They can read STDIN, so you can pipe to them...
+   I have included a few little Ruby scripts that implement each class. They can accept
+   STDIN, so you can pipe to them (and to each other)...
 
 
  2. Installation and Usage
 
    See the tool-specific README files for instructions on in-code usage. e.g ./val-ipng/README
 
-   I will commit the implementing scripts shortly.
+   To use the sample scripts:
+
+   $ ./script/ipng.rb 203.32.120.10
+   > ::CB20:780A
+
+   $ ./script/expand.rb ::CB20:780A
+   > 0:0:0:0:0:0:CB20:780A
+
+   $ ./script/expand.rb --long 1080:90::CDE1:FF22
+   > 1080:0090:0000:0000:0000:0000:CDE1:FF22
+
+   $ ./script/compact.rb 1080:0090:0000:0000:0000:0000:CDE1:FF22
+   > 1080:90:0:0:0:0:CDE1:FF22
+
+   $ ./script/compact.rb --tiny 1080:0090:0000:0000:0000:0000:CDE1:FF22
+   > 1080:90::CDE1:FF22
+
+   All scripts can accept STDIN, so you can pipe between them. For example:
+
+   $ ./script/ipng.rb 203.32.120.10 | ./script/expand.rb --long
+   > 0000:0000:0000:0000:0000:0000:CB20:780A
+
 
  3. Notes
 
