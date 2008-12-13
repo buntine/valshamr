@@ -12,7 +12,7 @@ class Valshamr::Expand
 
   def expand(length = :short)
     unless is_valid_compacted_ipv6_address?
-      raise Valshamr::InvalidIPv6Error, "Expected compacted IPv6 address (e.g ::8:CD09:1F0A), but received: #{@ip_address}"
+      raise Valshamr::InvalidIPv6Error, "Expected compacted IPv6 address (e.g ::8:CD09:1F0A), but received: #{@ip_address}."
     end
 
     ip = [""] * 8

@@ -6,3 +6,4 @@ module Valshamr; end
 require File.join(File.dirname(__FILE__), '../val-ipng/lib/ipng')
 require File.join(File.dirname(__FILE__), '../val-expand/lib/expand')
 require File.join(File.dirname(__FILE__), '../val-compact/lib/compact')
+require File.join(File.dirname(__FILE__), '../val-to-binary/lib/to_binary')

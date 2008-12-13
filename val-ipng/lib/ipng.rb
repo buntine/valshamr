@@ -14,7 +14,7 @@ class Valshamr::IPng
   # is returned in double-colon notation (compact form).
   def transform
     unless is_valid_ipv4_address?
-      raise Valshamr::InvalidIPv4Error, "Expected IPv4 address in the form of x[xx].x[xx].x[xx].x[xx], but received: #{@ip_address}"
+      raise Valshamr::InvalidIPv4Error, "Expected IPv4 address in the form of x[xx].x[xx].x[xx].x[xx], but received: #{@ip_address}."
     end
 
     octets = @ip_address.split "."

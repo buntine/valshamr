@@ -1,8 +1,8 @@
 
 # This class is part of the Valshamr software suite.
-# It will transform a valid IPv6 address from full-form into it's double-colon notation equivalent.
+# It will transform a valid IPv6 address from full-form into it's binary equivalent.
 
-class Valshamr::Compact
+class Valshamr::ToBinary
 
   attr_reader :ip_address
 
@@ -10,18 +10,15 @@ class Valshamr::Compact
     @ip_address = ip_address.to_s
   end
 
-  def compact(length=:short)
+  def transform(bits_per_line=32)
     unless is_valid_expanded_ipv6_address?
       raise Valshamr::InvalidIPv6Error, "Expected expanded IPv6 address (e.g FF11:0:0:0:0:8:CD09:1F0A), but received: #{@ip_address}."
     end
 
-    ip = remove_leading_zeroes_from_octets
-
-    if length.eql? :tiny
-      ip.sub! /(^|:)(0:){1,}/, "::"
+    unless (8..128).include?(bits_per_line) and bits_per_line % 8 == 0
+      raise Valshamr::InvalidBitCount, "Bits per line must be between 8 and 128 and be a multiple of 8."
     end
 
-    ip
   end
 
   private
@@ -31,19 +28,7 @@ class Valshamr::Compact
   def is_valid_expanded_ipv6_address?
     (@ip_address =~ /^[a-fA-F0-9\:]{15,39}$/ and !@ip_address.include? "::")
   end
-
-  # Removes leading zeroes from each portion of the IP address.
-  # I like the word "octet", even though each portion is actually 16-bit...
-  def remove_leading_zeroes_from_octets
-    ip = @ip_address.split ":"
-
-    ip.map! do |octet|
-      no_zeroes = octet.sub /^0+/, ""
-      no_zeroes.empty? ? "0" : no_zeroes
-    end
-
-    ip.join ":"
-  end
 end
 
 class Valshamr::InvalidIPv6Error < Exception; end
+class Valshamr::InvalidBitCount < Exception; end
