@@ -18,25 +18,25 @@ class Valshamr::Expand
     ip = [""] * 8
     left, right = @ip_address.split "::", 2
 
-    # Place the left-hand octets in their appropriate positions.
+    # Place the left-hand portions in their appropriate positions.
     unless left.empty?
-      left_octets = left.split ":"
-      left_octets.each_with_index { |slice, index| ip[index] = slice }
+      left_portions = left.split ":"
+      left_portions.each_with_index { |slice, index| ip[index] = slice }
     end
 
-    # Place the right-hand octets in their appropriate positions (reverse order).
+    # Place the right-hand portions in their appropriate positions (reverse order).
     unless right.empty?
-      right_octets = right.split ":"
-      right_octets.reverse!
-      right_octets.each_with_index { |slice, index| ip[7 - index] = slice }
+      right_portions = right.split ":"
+      right_portions.reverse!
+      right_portions.each_with_index { |slice, index| ip[7 - index] = slice }
     end
 
     # Finally, anything left over in the middle must be a zero.
-    ip.map! { |octet| octet.empty? ? "0" : octet }
+    ip.map! { |portion| portion.empty? ? "0" : portion }
 
-    # Pad each octet with leading zeroes, if necessary.
+    # Pad each portion with leading zeroes, if necessary.
     if length.eql? :long
-      ip.map! { |octet| octet.insert(0, "0" * (4 - octet.length)) }
+      ip.map! { |portion| portion.insert(0, "0" * (4 - portion.length)) }
     end
 
     ip.join ":"

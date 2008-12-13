@@ -32,7 +32,8 @@ class Valshamr::Compact
     (@ip_address =~ /^[a-fA-F0-9\:]{15,39}$/ and !@ip_address.include? "::")
   end
 
-  # Removes leading zeroes from each octet in the IP address.
+  # Removes leading zeroes from each portion of the IP address.
+  # I like the word "octet", even though each portion is actually 16-bit...
   def remove_leading_zeroes_from_octets
     ip = @ip_address.split ":"
 

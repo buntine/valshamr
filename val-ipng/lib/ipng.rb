@@ -20,7 +20,7 @@ class Valshamr::IPng
     octets = @ip_address.split "."
     octets.map! { |octet| convert_decimal_octet_to_hexadecimal octet.to_i }
 
-    new_ip = construct_hexadecimal_octets octets
+    new_ip = construct_hexadecimal_portions octets
 
     "::#{new_ip}"
   end
@@ -35,10 +35,10 @@ class Valshamr::IPng
     (0..255).include? octet.to_i
   end
 
-  # Converts the decimal octet to base-16.
+  # Converts the decimal octet to base-16 (hexadecimal).
   def convert_decimal_octet_to_hexadecimal(octet)
     unless is_valid_decimal_octet? octet
-      raise Valshamr::InvalidDecimalOctetError, "Expected octet in the range of 0..255, but received: #{octet}"
+      raise Valshamr::InvalidDecimalOctetError, "Expected decimal value in the range of 0..255, but received: #{octet}"
     end
 
     hexadecimal = octet.to_s(base=16).upcase
@@ -49,14 +49,14 @@ class Valshamr::IPng
 
   # Breaks the array into two slices and joins them
   # with a colon.
-  def construct_hexadecimal_octets(octets)
-    octet_group = []
+  def construct_hexadecimal_portions(portions)
+    portion_group = []
 
-    octets.each_slice(2) do |slice|
-      octet_group << slice.join
+    portions.each_slice(2) do |slice|
+      portion_group << slice.join
     end
 
-    octet_group.join ":"
+    portion_group.join ":"
   end
 
 end
