@@ -22,8 +22,8 @@ addresses.each do |ip_address|
 
   begin
     puts ipng.transform
-  rescue => e
+  rescue Valshamr::InvalidIPv4Error, Valshamr::InvalidDecimalOctetError => e
+     puts "ERROR: #{e.message}"
      exit 1
-     raise e
   end
 end
