@@ -19,6 +19,13 @@ class Valshamr::ToBinary
       raise Valshamr::InvalidBitCount, "Bits per line must be between 8 and 128 and be a multiple of 8."
     end
 
+    chunks = @ip_address.split ":"
+
+    chunks.map! do |chunk|
+      chunk.hex.to_s(base=2).rjust(16, "0")
+    end
+
+    chunks.join " "
   end
 
   private
