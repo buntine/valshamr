@@ -28,8 +28,8 @@ addresses.each do |ip_address|
 
   begin
     puts compactor.compact(length)
-  rescue Valshamr::InvalidIPv6Error => e
-     puts "ERROR: #{e.message}"
+  rescue Valshamr::InvalidIPv6Error
+     puts "ERROR: #{$!.message}"
      exit 1
   end
 end
