@@ -15,10 +15,18 @@ describe Valshamr::ToBinary do
   end
 
   it "should generate binary representations of valid IPv6 addresses and default to 32 bits per line" do
-    val_to_binary = Valshamr::ToBinary.new "1080:900:CDDC:0:0:0:C0A8:1ED2"
+    val_to_binary_a = Valshamr::ToBinary.new "1080:900:CDDC:0:0:0:C0A8:1ED2"
+    val_to_binary_b = Valshamr::ToBinary.new "FFAA:1200:CFDC:01FD:1221:99AA:C348:BC99"
+    val_to_binary_c = Valshamr::ToBinary.new
 
-    binary_data = "0001 0000 1000 0000 0000 1001 0000 0000\n1100 1101 1101 1100 0000 0000 0000 0000\n0000 0000 0000 0000 0000 0000 0000 0000\n1100 0000 1010 1000 0001 1110 1101 0010"
-    val_to_binary.transform.should eql(binary_data)
+    binary_data_a = "0001 0000 1000 0000 0000 1001 0000 0000\n1100 1101 1101 1100 0000 0000 0000 0000\n0000 0000 0000 0000 0000 0000 0000 0000\n1100 0000 1010 1000 0001 1110 1101 0010"
+    val_to_binary_a.transform.should eql(binary_data_a)
+
+    binary_data_b = "1111 1111 1010 1010 0001 0010 0000 0000\n1100 1111 1101 1100 0000 0001 1111 1101\n0001 0010 0010 0001 1001 1001 1010 1010\n1100 0011 0100 1000 1011 1100 1001 1001"
+    val_to_binary_b.transform.should eql(binary_data_b)
+
+    binary_data_c = "0000 0000 0000 0000 0000 0000 0000 0000\n0000 0000 0000 0000 0000 0000 0000 0000\n0000 0000 0000 0000 0000 0000 0000 0000\n0000 0000 0000 0000 0000 0000 0000 0001"
+    val_to_binary_c.transform.should eql(binary_data_c)
   end
 
   describe "when generating bits on multiple lines" do

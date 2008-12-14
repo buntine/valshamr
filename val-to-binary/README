@@ -1,0 +1,45 @@
+============================================
+ val-to-binary v0.1
+ By Andrew Buntine, 2008
+============================================
+
+ 1. Introduction
+
+   The val-to-binary tool is part of the Valshamr suite. It's sole purpose is to
+   transform a full-formed IPv6 address into it's binary equivalent. It will work
+   with both full (e.g 0000:0000:0000:FF11:0090:88CD:1ED2:000A) and semi-full
+   (e.g 80:8:0:0:0:0:FF1:FF88) addresses.
+
+   The address will default to loopback/localhost (::1) if none is supplied.
+
+
+ 2. Usage
+
+   # Standare usage. This will return the binary data on four lines.
+   to_binary = Valshamr::ToBinary.new "1080:900:CDDC:0:0:0:C0A8:1ED2"
+   to_binary.transform
+   => 0001 0000 1000 0000 0000 1001 0000 0000
+      1100 1101 1101 1100 0000 0000 0000 0000
+      0000 0000 0000 0000 0000 0000 0000 0000
+      1100 0000 1010 1000 0001 1110 1101 0010
+
+   # You can also have the binary returned as 8 lines (16 bits), 4 lines (32 bits), 2 lines (64 bits), or 1 line (128 bits).
+   to_binary = Valshamr::ToBinary.new "1080:900:CDDC:0:0:0:C0A8:1ED2"
+   to_binary.transform(128)
+   => 0001 0000 1000 0000 0000 1001 0000 0000 1100 1101 1101 1100 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 1100 0000 1010 1000 0001 1110 1101 0010
+
+   to_binary.transform(64)
+   => 0001 0000 1000 0000 0000 1001 0000 0000 1100 1101 1101 1100 0000 0000 0000 0000
+      0000 0000 0000 0000 0000 0000 0000 0000 1100 0000 1010 1000 0001 1110 1101 0010
+
+   to_binary.transform(16)
+   => 0001 0000 1000 0000
+      0000 1001 0000 0000
+      1100 1101 1101 1100
+      0000 0000 0000 0000
+      0000 0000 0000 0000
+      0000 0000 0000 0000
+      1100 0000 1010 1000
+      0001 1110 1101 0010
+
+   The Valshamr suite ships with a command-line tool that implements this library.

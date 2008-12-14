@@ -1,5 +1,5 @@
 # Application root.
-# Sets up the namespace, shared logic and starts the loading sequence.
+# Sets up the namespace, shared logic, exception classes and starts the loading sequence.
 
 module Valshamr
 

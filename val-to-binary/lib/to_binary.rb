@@ -17,7 +17,7 @@ class Valshamr::ToBinary
     end
 
     unless is_valid_bit_count? bits_per_line
-      raise Valshamr::InvalidBitCount, "Bits per line must be 16 (eight lines), 32 (two lines), 64 (four lines) or 128 (one line)"
+      raise Valshamr::InvalidBitCount, "Bits per line must be 16 (eight lines), 32 (four lines), 64 (two lines) or 128 (one line)"
     end
 
     chunks = @ip_address.split ":"
