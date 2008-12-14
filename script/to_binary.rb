@@ -28,9 +28,9 @@ addresses.each do |ip_address|
   to_binary = Valshamr::ToBinary.new ip_address
 
   begin
+    puts "-" * 10 if shown; shown = true
+
     puts to_binary.transform(bits_per_line)
-    puts "-" * 10 if shown
-    shown = true
   rescue Valshamr::InvalidIPv6Error, Valshamr::InvalidBitCount
      puts "ERROR: #{$!.message}"
      exit 1

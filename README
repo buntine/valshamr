@@ -14,6 +14,7 @@
      - Transform IPv4 address to it's IPv6 equivalent. (val-ipng)
      - Contract an IPv6 address to short and/or double-colon notation. (val-compact)
      - Expand an IPv6 address from dc-notation to it's full form. (val-expand)
+     - Transform an IPv6 address into it's binary equivalent. (val-to-binary)
 
    I have included a few little Ruby scripts that implement each class. They can accept
    STDIN, so you can pipe to them (and to each other)...
@@ -40,10 +41,30 @@
    $ ./script/compact.rb --tiny 1080:0090:0000:0000:0000:0000:CDE1:FF22
    > 1080:90::CDE1:FF22
 
+   $ ./script/to_binary.rb 1080:90:0:0:ADD:67:1212:999A
+   > 0001 0000 1000 0000 0000 0000 1001 0000
+   > 0000 0000 0000 0000 0000 0000 0000 0000
+   > 0000 1010 1101 1101 0000 0000 0110 0111
+   > 0001 0010 0001 0010 1001 1001 1001 1010
+
+   $ ./script/to_binary.rb --bits 64 1080:90:0:0:ADD:67:1212:999A
+   > 0001 0000 1000 0000 0000 0000 1001 0000 0000 0000 0000 0000 0000 0000 0000 0000
+   > 0000 1010 1101 1101 0000 0000 0110 0111 0001 0010 0001 0010 1001 1001 1001 1010
+
+   $ ./script/to_binary.rb --bits 128 1080:90:0:0:ADD:67:1212:999A
+   > 0001 0000 1000 0000 0000 0000 1001 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 1010 1101 1101 0000 0000 0110 0111 0001 0010 0001 0010 1001 1001 1001 1010
+
+   $ echo "You can also use the -b alias and it will work with 16 bits, but you get the picture..."
+
+
    All scripts can accept STDIN, so you can pipe between them. For example:
 
    $ ./script/ipng.rb 203.32.120.10 | ./script/expand.rb --long
    > 0000:0000:0000:0000:0000:0000:CB20:780A
+
+   $ ./script/ipng.rb 202.123.102.99 | ./script/expand.rb | ./script/to_binary.rb --bits 64
+   > 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000
+   > 0000 0000 0000 0000 0000 0000 0000 0000 1100 1010 0111 1011 0110 0110 0110 0011
 
 
  3. Notes
