@@ -17,7 +17,8 @@ describe Valshamr::ToBinary do
   it "should generate binary representations of valid IPv6 addresses and default to 32 bits per line" do
     val_to_binary = Valshamr::ToBinary.new "1080:900:CDDC:0:0:0:C0A8:1ED2"
 
-    val_to_binary.transform.should eql("ddd")
+    binary_data = "0001 0000 1000 0000 0000 1001 0000 0000\n1100 1101 1101 1100 0000 0000 0000 0000\n0000 0000 0000 0000 0000 0000 0000 0000\n1100 0000 1010 1000 0001 1110 1101 0010"
+    val_to_binary.transform.should eql(binary_data)
   end
 
   describe "when generating bits on multiple lines" do

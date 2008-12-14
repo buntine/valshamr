@@ -28,7 +28,18 @@ class Valshamr::ToBinary
       bits
     end
 
-    chunks.join " "
+    binary_data = chunks.join " "
+
+    # Add in newlines at the appropriate positions. There has GOT to be a
+    # better way of doing this. Please enlighten me.
+    (1..(128 / bits_per_line)-1).each do |line|
+      block = line * bits_per_line
+      spaces = (block / 4) - 1
+
+      binary_data[block + spaces, 1] = "\n"
+    end
+
+    binary_data
   end
 
   private
