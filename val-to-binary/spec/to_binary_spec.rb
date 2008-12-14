@@ -17,7 +17,14 @@ describe Valshamr::ToBinary do
   it "should generate binary representations of valid IPv6 addresses" do
     val_to_binary = Valshamr::ToBinary.new "1080:900:CDDC:0:0:0:C0A8:1ED2"
 
-    val_to_binary.transform.should eql("dddd")
+    val_to_binary.transform.should eql("ddd")
+  end
+
+  it "should generate binary representations with the correct bits per line" do
+    val_to_binary = Valshamr::ToBinary.new "1080:900:CDDC:0:0:0:C0A8:1ED2"
+
+    one_line = "0001 0000 1000 0000 0000 1001 0000 0000 1100 1101 1101 1100 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 1100 0000 1010 1000 0001 1110 1101 0010"
+    val_to_binary.transform(128).should eql(one_line)
   end
 
   it "should raise exception if an invalid address is supplied" do
