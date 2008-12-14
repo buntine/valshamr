@@ -16,11 +16,12 @@ class Valshamr::ToBinary
     end
 
     unless is_valid_bit_count? bits_per_line
-      raise Valshamr::InvalidBitCount, "Bits per line must be between 8 and 128 and be a multiple of 8."
+      raise Valshamr::InvalidBitCount, "Bits per line must be 16 (eight lines), 32 (two lines), 64 (four lines) or 128 (one line)"
     end
 
     chunks = @ip_address.split ":"
 
+    # This seems too cryptic.
     chunks.map! do |chunk|
       bits = chunk.hex.to_s(base=2).rjust(16, "0")
       (1..3).each { |x| bits.insert(-(x*4)-x, " ") }
@@ -39,7 +40,7 @@ class Valshamr::ToBinary
   end
 
   def is_valid_bit_count?(bits)
-    (8..128).include?(bits) and bits % 8 == 0
+    [16, 32, 64, 128].include? bits.to_i
   end
 end
 

@@ -14,17 +14,36 @@ describe Valshamr::ToBinary do
     val_to_binary.ip_address.should eql("0:0:0:0:0:0:0:1")
   end
 
-  it "should generate binary representations of valid IPv6 addresses" do
+  it "should generate binary representations of valid IPv6 addresses and default to 32 bits per line" do
     val_to_binary = Valshamr::ToBinary.new "1080:900:CDDC:0:0:0:C0A8:1ED2"
 
     val_to_binary.transform.should eql("ddd")
   end
 
-  it "should generate binary representations with the correct bits per line" do
-    val_to_binary = Valshamr::ToBinary.new "1080:900:CDDC:0:0:0:C0A8:1ED2"
+  describe "when generating bits on multiple lines" do
+    before do
+      @val_to_binary = Valshamr::ToBinary.new "1080:900:CDDC:0:0:0:C0A8:1ED2"
+    end
 
-    one_line = "0001 0000 1000 0000 0000 1001 0000 0000 1100 1101 1101 1100 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 1100 0000 1010 1000 0001 1110 1101 0010"
-    val_to_binary.transform(128).should eql(one_line)
+    it "should generate binary on one line" do
+      one_line = "0001 0000 1000 0000 0000 1001 0000 0000 1100 1101 1101 1100 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 1100 0000 1010 1000 0001 1110 1101 0010"
+      @val_to_binary.transform(128).should eql(one_line)
+    end
+
+    it "should generate binary on two lines" do
+      two_lines = "0001 0000 1000 0000 0000 1001 0000 0000 1100 1101 1101 1100 0000 0000 0000 0000\n0000 0000 0000 0000 0000 0000 0000 0000 1100 0000 1010 1000 0001 1110 1101 0010"
+      @val_to_binary.transform(64).should eql(two_lines)
+    end
+
+    it "should generate binary on four lines" do
+      four_lines = "0001 0000 1000 0000 0000 1001 0000 0000\n1100 1101 1101 1100 0000 0000 0000 0000\n0000 0000 0000 0000 0000 0000 0000 0000\n1100 0000 1010 1000 0001 1110 1101 0010"
+      @val_to_binary.transform(32).should eql(four_lines)
+    end
+
+    it "should generate binary on eight lines" do
+      eight_lines = "0001 0000 1000 0000\n0000 1001 0000 0000\n1100 1101 1101 1100\n0000 0000 0000 0000\n0000 0000 0000 0000\n0000 0000 0000 0000\n1100 0000 1010 1000\n0001 1110 1101 0010"
+      @val_to_binary.transform(16).should eql(eight_lines)
+    end
   end
 
   it "should raise exception if an invalid address is supplied" do
