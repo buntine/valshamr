@@ -3,6 +3,7 @@
 # It will transform a valid IPv6 address from double-colon notation to it's full form.
 
 class Valshamr::Expand
+  include Valshamr
 
   attr_reader :ip_address
 
@@ -42,14 +43,4 @@ class Valshamr::Expand
     ip.join ":"
   end
 
-  private
-
-  # This is a very slack implementation.
-  # Feel free to improve it.
-  def is_valid_compacted_ipv6_address?
-    (@ip_address =~ /^[a-fA-F0-9\:]{3,37}$/ and @ip_address.include? "::")
-  end
-
 end
-
-class Valshamr::InvalidIPv6Error < Exception; end

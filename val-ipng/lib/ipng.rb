@@ -3,6 +3,7 @@
 # It will transform a valid IPv4 address (e.g 192.168.30.210) into it's IPv6 equivelant (::C0A8:1ED2).
 
 class Valshamr::IPng
+  include Valshamr
 
   attr_reader :ip_address
 
@@ -60,6 +61,3 @@ class Valshamr::IPng
   end
 
 end
-
-class Valshamr::InvalidIPv4Error < Exception; end
-class Valshamr::InvalidDecimalOctetError < Exception; end

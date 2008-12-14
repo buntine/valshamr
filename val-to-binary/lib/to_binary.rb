@@ -1,8 +1,9 @@
 
 # This class is part of the Valshamr software suite.
-# It will transform a valid IPv6 address from full-form into it's binary equivalent.
+# It will transform a valid, full-formed IPv6 address into it's binary equivalent.
 
 class Valshamr::ToBinary
+  include Valshamr
 
   attr_reader :ip_address
 
@@ -21,7 +22,7 @@ class Valshamr::ToBinary
 
     chunks = @ip_address.split ":"
 
-    # This seems too cryptic.
+    # Generate 16-bit chunks and break into parts.
     chunks.map! do |chunk|
       bits = chunk.hex.to_s(base=2).rjust(16, "0")
       (1..3).each { |x| bits.insert(-(x*4)-x, " ") }
@@ -44,16 +45,7 @@ class Valshamr::ToBinary
 
   private
 
-  # This is a very slack implementation.
-  # Feel free to improve it.
-  def is_valid_expanded_ipv6_address?
-    (@ip_address =~ /^[a-fA-F0-9\:]{15,39}$/ and !@ip_address.include? "::")
-  end
-
   def is_valid_bit_count?(bits)
     [16, 32, 64, 128].include? bits.to_i
   end
 end
-
-class Valshamr::InvalidIPv6Error < Exception; end
-class Valshamr::InvalidBitCount < Exception; end

@@ -3,6 +3,7 @@
 # It will transform a valid IPv6 address from full-form into it's double-colon notation equivalent.
 
 class Valshamr::Compact
+  include Valshamr
 
   attr_reader :ip_address
 
@@ -26,12 +27,6 @@ class Valshamr::Compact
 
   private
 
-  # This is a very slack implementation.
-  # Feel free to improve it.
-  def is_valid_expanded_ipv6_address?
-    (@ip_address =~ /^[a-fA-F0-9\:]{15,39}$/ and !@ip_address.include? "::")
-  end
-
   # Removes leading zeroes from each portion of the IP address.
   # I like the word "octet", even though each portion is actually 16-bit...
   def remove_leading_zeroes_from_octets
@@ -45,5 +40,3 @@ class Valshamr::Compact
     ip.join ":"
   end
 end
-
-class Valshamr::InvalidIPv6Error < Exception; end
